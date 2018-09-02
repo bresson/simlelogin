@@ -1,0 +1,11 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: grid;
+}
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
