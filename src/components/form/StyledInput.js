@@ -1,5 +1,8 @@
 import React from "react";
 import styled from "styled-components";
+import './Input.css';
+
+
 
 const Label = styled.label`
   position: relative;
@@ -69,6 +72,14 @@ const SpanLabel = styled.span`
   transition: all 0.2s ease;
 `
 
+const SpanError = styled.span`
+  color: tomato;
+  display: none;
+  font-size: 11px;
+  font-style: italic;
+  transition: all 0.15s ease;
+`
+
 const StyledInput = props => {
   return (
     <Label className="inp">
@@ -79,6 +90,7 @@ const StyledInput = props => {
         type={props.type || 'text'} 
         value={props.value || ''}
       />
+      <SpanError className={ props.error ? 'error': null }>{ props.error ? props.error : null }</SpanError>
       <SpanLabel className="label">{props.label}</SpanLabel>
       <SpanBorder className="border"></SpanBorder>
     </Label>

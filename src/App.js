@@ -8,24 +8,33 @@ export default class App extends Component {
     super(props);
 
     this.state = {
-      fields: {
-        username: "",
-        password: ""
-      },
+      fields: [
+        'username',
+        'password'
+      ],
       fieldRules: {
-        username: /[.]*/g,
-        password: /[.]*/g
+        username: /[\w-\s]+/,
+        password: /[\S]+/
       },
       fieldValidation: {
-        username: /[.]*/g,
-        password: /[.]*/g
+        username: /[\w-.\s]+/,
+        password: /[\S]+/
       }
     };
+    this.loginSubmit = this.loginSubmit.bind(this)
   }
+
+  /**
+   * Handles login submit
+   */
+  loginSubmit() {
+    debugger;
+  }
+
   render() {
     return (
       <div className="App">
-        <Form rules={this.state.fieldRules} fields={this.state.fields}>
+        <Form rules={this.state.fieldRules} fields={this.state.fields} loginSubmit={this.loginSubmit}>
           {(handleChange, errors, values) => {
             console.log(`values ${JSON.stringify(values)}`);
             return (
@@ -36,6 +45,7 @@ export default class App extends Component {
                   type="input"
                   label="username"
                   name="username"
+                  error={errors.username}
                 />
                 <StyledInput
                   onChange={(evt) => handleChange(evt)}
@@ -43,7 +53,9 @@ export default class App extends Component {
                   label="password"
                   type="password"
                   name="password"
+                  error={errors.password}
                 />
+                
                 <button type="submit">Submit</button>
               </React.Fragment>
             );
