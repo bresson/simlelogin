@@ -71,6 +71,9 @@ class Form extends Component {
    * if validation fails, create error for that field and save to state
    * 
    * BUG(s):
+   * 1. Empty fields are not validated!
+   * 2. Cannot backspace / delete last item!
+   * 3. Cannot select & backspace delete!
    */
 
   handleSubmit(evt) {
