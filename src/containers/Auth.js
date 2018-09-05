@@ -1,68 +1,20 @@
 import React, { Component } from 'react'
-import Form from "../containers/Form";
-import StyledInput from "../components/form/StyledInput";
+import { BrowserRouter, Route, Link } from 'react-router-dom'
+import Login from './Login'
+import Register from './Register'
 
+const Auth = props => (
+  <div className="container">
+    <h1>Auth</h1>
+    <p>Please login or register</p>
+    <div className="tab__container">
+      <div className='menu__item'><Link to="/auth/register">Register</Link></div>
+      <div className='menu__item'><Link to="/auth/login">Login</Link></div>
+    </div>  
+    <Route path={`${props.match.url}/login`} component={Login} />
+    <Route path={`${props.match.url}/register`} component={Register} />
+  </div>
+)
 
-export default class Auth extends Component {
-    constructor(props) {
-      super(props);
-  
-      this.state = {
-        fields: [
-          'username',
-          'password'
-        ],
-        fieldRules: {
-          username: /[\w-\s]+/,
-          password: /[\S]+/
-        },
-        fieldValidation: {
-          username: /[\w-.\s]+/,
-          password: /[\S]+/
-        }
-      };
-      this.loginSubmit = this.loginSubmit.bind(this)
-    }
-  
-    /**
-     * Handles login submit
-     */
-    loginSubmit() {
-      debugger;
-    }
-  
-    render() {
-      return (
-        <div className="App">
-          <Form rules={this.state.fieldRules} fields={this.state.fields} loginSubmit={this.loginSubmit}>
-            {(handleChange, errors, values) => {
-              console.log(`values ${JSON.stringify(values)}`);
-              return (
-                <React.Fragment>
-                  <StyledInput
-                    onChange={(evt) => handleChange(evt)}
-                    value={values.username}
-                    type="input"
-                    label="username"
-                    name="username"
-                    error={errors.username}
-                  />
-                  <StyledInput
-                    onChange={(evt) => handleChange(evt)}
-                    value={values.password}
-                    label="password"
-                    type="password"
-                    name="password"
-                    error={errors.password}
-                  />
-                  
-                  <button type="submit">Submit</button>
-                </React.Fragment>
-              );
-            }}
-          </Form>
-        </div>
-      );
-    }
-  }
+export default Auth
   
